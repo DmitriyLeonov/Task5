@@ -1,0 +1,31 @@
+﻿@model IEnumerable<User>
+
+@{
+    ViewData["Title"] = "Users";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Users</h1>
+<form method="post">
+    <div class="nl">
+        <div id="toolbar">
+        </div>
+        <br />
+        <table class="table" id="anyTable">
+            <thead>
+            <tr><th>Index</th><th>Id</th><th>Name</th><th>Address</th><th>Phone number</th></tr>
+            </thead>
+            <tbody>
+            
+            </tbody>
+        </table>
+    </div>
+</form>
+
+@section Scripts {
+    <script src="~/js/InfinitiySroll.js"></script>
+
+    <script>
+        var infinityScroll = new InfinitiySroll("anyTable", "/home/_Users", { sortOrder: "ascending", searchString: "3" });
+    </script>
+}

@@ -3,27 +3,7 @@
 }
 @model IEnumerable<User>
 
-<h2>Users</h2>
-
-<form method="post">
-    <div class="nl">
-        <div id="toolbar">
-        </div>
-        <br />
-        <table class="table table-hover table-bordered ">
-            <tbody class="table-responsive ">
-            <tr><th>Index</th><th>Id</th><th>Name</th><th>Address</th><th>Phone number</th></tr>
-            @foreach(var user in Model)
-            {
-                <tr>
-                    <td>@user.Index</td>
-                    <td>@user.UserId</td>
-                    <td>@user.FullName</td>
-                    <td>@user.Address</td>
-                    <td>@user.PhoneNumber</td>
-                </tr>
-            }
-            </tbody>
-        </table>
-    </div>
-</form>
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
