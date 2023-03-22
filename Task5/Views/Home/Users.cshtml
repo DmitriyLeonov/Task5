@@ -9,7 +9,7 @@
     <div class="nl">
     <div id="toolbar" class="input-group mb-3">
             <form method='post' asp-controller="Home" asp-action="Options">
-            <label>Seed:</label><input type="number" name='appSeed' class="form-control" value="0" min="0" />
+            <label>Seed:</label><input type="number" id="d4" name='appSeed' class="form-control" value="0" min="0" />
             <label>Region:</label><select class="form-select" name='region'>
                     <option value="it" selected>Italy</option>
                     <option value="es">Spain</option>
@@ -18,10 +18,12 @@
                 <br/>
                 <br/>
                 <p>
-                <label>Errors:</label><input type="range" class="form-range" min="0" max="10" step="0.25" value="0" oninput="this.nextElementSibling.value = this.value">
-                <input type="number" name='errors' class="form-control" value="0" max="1000" min="0" step="0.01" oninput="this.previousElementSibling.value = this.value" />
+                    <label>Errors:</label><input type="range" class="form-range" min="0" max="10" step="0.25" value="0" oninput="this.nextElementSibling.value = this.value">
+                    <input type="number" name='errors' class="form-control" value="0" max="1000" min="0" step="0.01" oninput="this.previousElementSibling.value = this.value" />
                 </p>
-            <input type='submit' class="btn btn-primary" value='Generate' />
+                <input type='submit' class="btn btn-primary" value='Generate' />
+                <input class="btn btn-danger" value='Random seed' onclick="generate()"/>
+                <a asp-action="DownloadCSV" asp-controller="Home" class="btn btn-success">Export CSV</a>
             </form>
         </div>
         <br />
@@ -36,7 +38,17 @@
     </div>
 @section Scripts {
     <script src="~/js/InfinitiySroll.js"></script>
-    <script src="js/site.js"></script>
+    @*<script src="js/site.js"></script>*@
+    <script>
+        function generate(){
+            var min=0; 
+            var max=500000;
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            var my_num=Math.floor(Math.random() * (max - min + 1)) + min;
+            document.getElementById("d4").value = my_num;
+        }
+    </script>
 
     <script>
         var infinityScroll = new InfinitiySroll("anyTable", "/home/_Users", { sortOrder: "ascending", searchString: "3" });

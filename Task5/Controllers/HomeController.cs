@@ -7,7 +7,10 @@ using Task5.Models;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using System;
 using System.Reflection;
+using System.Text;
+using CsvHelper;
 using Microsoft.CodeAnalysis;
+using System.Globalization;
 
 namespace Task5.Controllers
 {
@@ -213,6 +216,17 @@ namespace Task5.Controllers
                     user.FullName = user.FullName.Insert(rnd.Next(0, user.FullName.Length - 1), symbols[rnd.Next(0, symbols.Length - 1)].ToString());
                 }
             }
+        }
+
+        public IActionResult DownloadCSV()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Index, UserId, Address, PhoneNumber, FullName");
+            foreach (var user in users)
+            {
+                sb.AppendLine($"{user.Index},{user.UserId},{user.Address.Replace(',','.')},{user.PhoneNumber},{user.FullName}");
+            }
+            return File(Encoding.UTF8.GetBytes(sb.ToString()), "text/csv", "users.csv");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
