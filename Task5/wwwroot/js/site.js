@@ -1,4 +1,16 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿let formData = {};
+const form = document.querySelector('form');
+const ls = localStorage;
 
-// Write your JavaScript code.
+form.addEventListener('input', function(event) {
+    formData[event.target.name] = event.target.value;
+    ls.setItem('formData', JSON.stringify(formData));
+});
+
+if (ls.getItem('formData')) {
+    formData = JSON.parse(ls.getItem('formData'));
+    for (let key in formData) {
+        form.elements[key].value = formData[key];
+    }
+}
+ls.clear();

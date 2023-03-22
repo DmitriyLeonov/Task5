@@ -6,9 +6,23 @@
 }
 
 <h1>Users</h1>
-<form method="post">
     <div class="nl">
-        <div id="toolbar">
+    <div id="toolbar" class="input-group mb-3">
+            <form method='post' asp-controller="Home" asp-action="Options">
+            <label>Seed:</label><input type="number" name='appSeed' class="form-control" value="0" min="0" />
+            <label>Region:</label><select class="form-select" name='region'>
+                    <option value="it" selected>Italy</option>
+                    <option value="es">Spain</option>
+                    <option value="de">Germany</option>
+                </select>
+                <br/>
+                <br/>
+                <p>
+                <label>Errors:</label><input type="range" class="form-range" min="0" max="10" step="0.25" value="0" oninput="this.nextElementSibling.value = this.value">
+                <input type="number" name='errors' class="form-control" value="0" max="1000" min="0" step="0.01" oninput="this.previousElementSibling.value = this.value" />
+                </p>
+            <input type='submit' class="btn btn-primary" value='Generate' />
+            </form>
         </div>
         <br />
         <table class="table" id="anyTable">
@@ -20,10 +34,9 @@
             </tbody>
         </table>
     </div>
-</form>
-
 @section Scripts {
     <script src="~/js/InfinitiySroll.js"></script>
+    <script src="js/site.js"></script>
 
     <script>
         var infinityScroll = new InfinitiySroll("anyTable", "/home/_Users", { sortOrder: "ascending", searchString: "3" });

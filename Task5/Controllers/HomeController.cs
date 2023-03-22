@@ -16,6 +16,9 @@ namespace Task5.Controllers
         public static int lastId = 0;
         public static int count = 20;
         public static int currentPage = 1;
+        public static int seed = 0;
+        public static string locale = "it";
+        public static double errorsCount = 0;
 
         public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
         {
@@ -28,6 +31,19 @@ namespace Task5.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult Options(string appSeed, string region, string errors)
+        {
+            users = new List<User>();
+            count = 20;
+            lastId = 0;
+            currentPage = 1;
+            seed = Int32.Parse(appSeed);
+            locale = region;
+            errorsCount = double.Parse(errors.Replace('.',','));
+            return View("Users");
+        }
+
         public IActionResult Users()
         {
             return View();
@@ -36,14 +52,12 @@ namespace Task5.Controllers
         [HttpPost]
         public IActionResult _Users(string sortOrder, string searchString, int firstItem = 0)
         {
-            int  seed = 3;
             seed += currentPage;
-            string locale = "it";
-            users.AddRange(UsersGenerator(locale, seed));
+            users.AddRange(UsersGenerator());
             var model = users.Skip(firstItem).Take(BATCH_SIZE).ToList();
             return PartialView(model);
         }
-        public IList<User> UsersGenerator(string locale, int seed)
+        public IList<User> UsersGenerator()
         {
             var users = new List<User>();
             Random random = new Random(seed);
@@ -71,6 +85,11 @@ namespace Task5.Controllers
                 user.FullName = FirstNames[random.Next(0, FirstNames.Count())].Name
                                 + " " + LastNames[random.Next(0, LastNames.Count())].SecondName;
                 users.Add(user);
+            }
+
+            if (errorsCount > 0)
+            {
+                _logger.LogInformation("error count{errorCount}",errorsCount);
             }
             count = 10;
             currentPage++;
