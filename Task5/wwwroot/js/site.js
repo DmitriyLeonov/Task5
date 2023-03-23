@@ -1,9 +1,8 @@
 ﻿    let formData = {};
     const form = document.querySelector("form");
-    const ls = sessionStorage;
-    
+    const ls = localStorage;
 
-form.addEventListener("change", function (event) {
+    form.addEventListener("input", function (event) {
         formData[event.target.name] = event.target.value;
         ls.setItem("formData", JSON.stringify(formData));
     });

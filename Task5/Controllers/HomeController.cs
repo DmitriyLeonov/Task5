@@ -109,6 +109,7 @@ namespace Task5.Controllers
         public void GenerateErrors(User user)
         {
             var errors = Math.Truncate(errorsCount + new Random().NextDouble());
+            _logger.LogInformation("error count{errorCount}:", errors);
             Random rnd = new Random();
             var num = rnd.NextDouble();
             if (num <= 0.33)
