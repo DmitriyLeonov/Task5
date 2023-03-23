@@ -1,10 +1,11 @@
-﻿@model IEnumerable<User>
+﻿@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@using Microsoft.AspNetCore.Mvc.Diagnostics
+@model IEnumerable<User>
 
 @{
     ViewData["Title"] = "Users";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <h1>Users</h1>
     <div class="nl">
     <div id="toolbar" class="input-group mb-3">
@@ -21,7 +22,7 @@
                     <label>Errors:</label><input type="range" class="form-range" min="0" max="10" step="0.25" value="0" oninput="this.nextElementSibling.value = this.value">
                     <input type="number" name='errors' class="form-control" value="0" max="1000" min="0" step="0.01" oninput="this.previousElementSibling.value = this.value" />
                 </p>
-                <input type='submit' class="btn btn-primary" value='Generate' />
+                <input type='submit' class="btn btn-primary" value='Generate'/>
                 <input class="btn btn-danger" value='Random seed' onclick="generate()"/>
                 <a asp-action="DownloadCSV" asp-controller="Home" class="btn btn-success">Export CSV</a>
             </form>
@@ -38,7 +39,7 @@
     </div>
 @section Scripts {
     <script src="~/js/InfinitiySroll.js"></script>
-    @*<script src="js/site.js"></script>*@
+    <script src="js/site.js"></script>
     <script>
         function generate(){
             var min=0; 
