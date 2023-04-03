@@ -2,8 +2,9 @@
     const form = document.querySelector("form");
     const ls = localStorage;
 
-    form.addEventListener("input", function (event) {
+    form.addEventListener("change", function (event) {
         formData[event.target.name] = event.target.value;
+        console.log(formData);
         ls.setItem("formData", JSON.stringify(formData));
     });
 
